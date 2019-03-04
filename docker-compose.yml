@@ -1,0 +1,58 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    env_file:
+      - .env.postgres
+  postgres_test:
+    image: 'postgres:latest'
+    ports:
+      - '55432:5432'
+    volumes:
+      - ./volumes/postgres_test:/var/lib/postgresql/data
+    env_file:
+      - .env.test.postgres
+
+  pgadmin:
+    image: 'dpage/pgadmin4:latest'
+    ports:
+      - "3051:80"
+    env_file:
+      - .env.pgadmin
+
+  redis:
+    image: 'redis:latest'
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
+
+  users-service:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./users-service
+    volumes:
+      - ./users-service:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    env_file:
+      - ./users-service/.env
+
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app

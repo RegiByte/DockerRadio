@@ -1,0 +1,38 @@
+{
+  "name": "users-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "migration": "knex migrate:make",
+    "migration:run": "knex migrate:latest",
+    "migration:rollback": "knex migrate:rollback",
+    "seeder": "knex seed:make",
+    "seeder:run": "knex seed:run",
+    "test": "jest --forceExit --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "pg": "^7.8.1",
+    "knex": "^0.16.3",
+    "uuid": "^3.3.2",
+    "config": "^3.0.1",
+    "jest": "^24.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "chai-html": "^1.2.2",
+    "koa-router": "^7.4.0",
+    "objection": "^1.6.3",
+    "lodash": "^4.17.11",
+    "bcrypt": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

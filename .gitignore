@@ -1,0 +1,7 @@
+/.idea
+/node_modules
+/base-service
+.env.pgadmin
+.env.postgres
+.env.test.postgres
+/volumes
